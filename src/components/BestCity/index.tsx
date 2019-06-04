@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, StyledBody, StyledAction, StyledThumbnail } from 'baseui/card';
+import { Card, StyledBody, StyledAction } from 'baseui/card';
 import { Button } from 'baseui/button';
 import { IWeatherData } from '../../App/types';
 

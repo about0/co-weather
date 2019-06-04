@@ -20,7 +20,7 @@ const App: React.FC = () => {
     setLoading(true);
     getClosestCities()
       .then(res => {
-        setCities(res.data.list.sort((a, b) => sortCities(a, b, isFemale)));
+        setCities(res.data.list.sort((a, b) => sortCities(a, b)));
         setLoading(false);
       })
       .catch((err: AxiosError) => {
@@ -46,7 +46,7 @@ const App: React.FC = () => {
     <div className={styles.App}>
       <div className={styles.Left}>
         <Checkbox checked={isFemale} onChange={handleGenderChange}>
-          Are you a girl? Check in!
+          Want to see the best city for girls? Check on!
         </Checkbox>
         <BestCity data={cities[0]} isFemale={isFemale} />
       </div>
