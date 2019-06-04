@@ -9,6 +9,7 @@ import CityTable from '../components/Table';
 import { getTableData, sortCities } from '../util';
 import BestCity from '../components/BestCity';
 import { Checkbox } from 'baseui/checkbox';
+import { Card } from 'baseui/card';
 
 const App: React.FC = () => {
   const [cities, setCities] = useState([] as IWeatherData[]);
@@ -44,6 +45,26 @@ const App: React.FC = () => {
   return (
     <div className={styles.App}>
       <div className={styles.Left}>
+        <Card
+          overrides={{ Root: { style: { marginBottom: '40px' } } }}
+          title={`About the App`}
+        >
+          <p>
+            This App calculates Heat Index with the{' '}
+            <a
+              href="https://en.wikipedia.org/wiki/Heat_index#Formula"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              formula
+            </a>
+            . It's different for men and women accordingly.
+          </p>
+          <p>
+            You can click on checkbox to test it out. But during the day winning
+            city would be the same for both genders.
+          </p>
+        </Card>
         <Checkbox checked={isFemale} onChange={() => setIsFemale(!isFemale)}>
           Want to see the best city for girls? Check on!
         </Checkbox>
