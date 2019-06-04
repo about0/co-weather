@@ -12,7 +12,7 @@ const BestCity: React.FunctionComponent<IProps> = ({ data, isFemale }) => {
   const getInfo = () =>
     isFemale
       ? `${data.name} is the best for girls!`
-      : `Boys are going to find ${data.name} city to be the best for them!`;
+      : `Boys are going to find ${data.name} to be the best for them!`;
 
   const handleClick = () => {
     window.open(`https://en.wikipedia.org/wiki/${data.name}`);
@@ -20,10 +20,18 @@ const BestCity: React.FunctionComponent<IProps> = ({ data, isFemale }) => {
 
   return (
     <Card
-      overrides={{ Root: { style: { width: '400px' } } }}
+      overrides={{ Root: { style: { width: '450px', minHeight: '205px' } } }}
       title={`Best city is: ${data.name}`}
     >
-      <StyledBody>{getInfo()}</StyledBody>
+      <StyledBody>
+        <p>
+          Temp.: <b>{data.main.temp} ℃</b>
+        </p>
+        <p>
+          Humidity: <b>{data.main.humidity}%</b>
+        </p>
+        <p>{getInfo()}</p>
+      </StyledBody>
       <StyledAction>
         <Button style={{ width: '100%' }} onClick={handleClick}>
           Interested? Try to find more info! Wikipedia

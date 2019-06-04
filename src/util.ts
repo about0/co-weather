@@ -12,11 +12,16 @@ const calcDistance = (num: number, target: number) => Math.abs(num - target)
 
 export const sortCities = (a: IWeatherData, b: IWeatherData, forFemale?: boolean) => {
     const perfTemp = forFemale ? 22 : 21
-    const prevCityTemp = a.main.temp;
-    const nextCityTemp = b.main.temp;
-    if (calcDistance(prevCityTemp, perfTemp) > calcDistance(nextCityTemp, perfTemp)) {
+    const perfHumidity = 50;
+
+    const combinedDistance = (obj: IWeatherData) => calcDistance(obj.main.temp, perfTemp) + calcDistance(obj.main.humidity, perfHumidity)
+    const prevTotalDistance = combinedDistance(a);
+    const nextTotalDistance = combinedDistance(b);
+
+
+    if (prevTotalDistance > nextTotalDistance) {
         return 1;
-    } else if (calcDistance(prevCityTemp, perfTemp) < calcDistance(nextCityTemp, perfTemp)) {
+    } else if (prevTotalDistance < nextTotalDistance) {
         return - 1;
     } else {
         return 0

@@ -24,15 +24,14 @@ const App: React.FC = () => {
         setLoading(false);
       })
       .catch((err: AxiosError) => {
+        setErr(err.response!.data.message);
         setLoading(false);
-        setErr(err.message);
       });
   }, []);
 
-  const handleGenderChange = () => {
-    setIsFemale(!isFemale);
-    setCities(cities.sort((a, b) => sortCities(a, b, !isFemale)));
-  };
+  useEffect(() => {
+    setCities(cities.sort((a, b) => sortCities(a, b, isFemale)));
+  }, [isFemale, cities]);
 
   if (loading) {
     return <Loader />;
@@ -45,7 +44,7 @@ const App: React.FC = () => {
   return (
     <div className={styles.App}>
       <div className={styles.Left}>
-        <Checkbox checked={isFemale} onChange={handleGenderChange}>
+        <Checkbox checked={isFemale} onChange={() => setIsFemale(!isFemale)}>
           Want to see the best city for girls? Check on!
         </Checkbox>
         <BestCity data={cities[0]} isFemale={isFemale} />
@@ -53,7 +52,7 @@ const App: React.FC = () => {
 
       <CityTable
         header="Other good cities in desc. order"
-        columns={['City', 'Current Temp.', 'Humidity']}
+        columns={['City', 'Current Temp., ℃', 'Humidity, %']}
         data={getTableData(cities.slice(1))}
       />
     </div>
